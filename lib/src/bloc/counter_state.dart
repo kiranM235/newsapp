@@ -5,6 +5,7 @@ class CounterState{
 
   CounterState copy(int? count){
     return CounterState(count ?? this.count);
+    /// -> CounterState(0)
   }
 
 }
