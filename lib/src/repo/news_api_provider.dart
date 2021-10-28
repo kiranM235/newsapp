@@ -10,7 +10,7 @@ class NewsApiProvider {
     final response = await client.get(
         Uri.parse("https://hacker-news.firebaseio.com/v0/topstories.json"));
     final body = jsonDecode(response.body);
-    return body;
+    return body.cast<int>();
   }
 
   /// 2. fetch item with the given id
