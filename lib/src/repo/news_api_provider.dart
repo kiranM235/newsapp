@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:news/src/core/constants.dart';
 import 'package:news/src/models/item_model.dart';
+import 'package:news/src/repo/sources.dart';
 
-class NewsApiProvider {
+class NewsApiProvider implements Source{
   Client client = Client();
   /// 1. fetch top ids
 
@@ -15,7 +16,8 @@ class NewsApiProvider {
   }
 
   /// 2. fetch item with the given id
-  Future<ItemModel> fetchItem(int id) async{
+  @override
+  Future<ItemModel?> fetchItem(int id) async{
     final response = await client
         .get(Uri.parse("$BASE_URL/item/$id.json"));
     final body = jsonDecode(response.body);

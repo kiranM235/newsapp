@@ -35,7 +35,7 @@ void main(){
       });
       final result = await apiProvider.fetchItem(8863);
 
-      expect(111, result.score);
+      expect(111, result!.score);
       expect("My YC app: Dropbox - Throw away your USB drive", result.title);
 
   });

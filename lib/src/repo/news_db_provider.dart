@@ -2,10 +2,11 @@ import 'dart:io';
 import 'package:news/src/core/constants.dart';
 import 'package:news/src/models/item_model.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:news/src/repo/sources.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as Path;
 
-class NewsDbProvider {
+class NewsDbProvider implements Source, Cache {
   Database? _db;
 
   NewsDbProvider() {
@@ -25,7 +26,7 @@ class NewsDbProvider {
           batch.execute(
             """
               CREATE TABLE $NEWS_TABLE (
-                id INTEGER PRIMARY KEY AUTO INCREMENT,
+                id INTEGER PRIMARY KEY,
                 by TEXT,
                 descendants INTEGER,
                 score INTEGER,
@@ -46,6 +47,7 @@ class NewsDbProvider {
   }
 
   /// fetch an item with the given id
+  @override
   Future<ItemModel?> fetchItem(int id) async {
     if(_db == null) await _init();
     final data = await _db!.query(NEWS_TABLE,where: "id = ?", whereArgs: [id]);
@@ -55,9 +57,19 @@ class NewsDbProvider {
 
   }
   /// insert an item model
+  @override
   Future<int> insertItem(ItemModel item) async {
     if(_db == null) await _init();
-    return _db!.insert(NEWS_TABLE, item.toDb());
+    return _db!.insert(NEWS_TABLE, item.toDb(),
+        conflictAlgorithm: ConflictAlgorithm.replace
+    );
+
     /// insert into news(id, title, url...) values(1, 'some title', 'https://we.')
+  }
+
+  @override
+  Future<List<int>> fetchTopIds() {
+    // TODO: implement fetchTopIds
+    throw UnimplementedError();
   }
 }
