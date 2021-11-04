@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news/src/bloc/news/news_bloc.dart';
 import 'package:news/src/bloc/news_bloc.dart';
 import 'package:news/src/repo/repository.dart';
 
