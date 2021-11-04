@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:news/src/screens/news_screen.dart';
 
 void main () {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(App());
+
 }
 
 class App extends StatelessWidget {
