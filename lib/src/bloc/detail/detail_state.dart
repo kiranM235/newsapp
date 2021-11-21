@@ -30,7 +30,7 @@ class DetailData extends DetailState {
     return DetailData(data ?? this.data);
   }
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [data];
   }
 
 

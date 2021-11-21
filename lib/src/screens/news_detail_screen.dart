@@ -65,6 +65,7 @@ class NewsDetailScreen extends StatelessWidget {
                       .headline6,
                 ),
               ),
+              if(item.kids!= null)
               Flexible(
                 fit: FlexFit.loose,
                 child: ListView.builder(
