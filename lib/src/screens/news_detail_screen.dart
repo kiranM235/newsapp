@@ -65,7 +65,7 @@ class NewsDetailScreen extends StatelessWidget {
                       .headline6,
                 ),
               ),
-              if(item.kids!= null)
+              if(item.kids != null && item.kids!.isNotEmpty)
               Flexible(
                 fit: FlexFit.loose,
                 child: ListView.builder(
